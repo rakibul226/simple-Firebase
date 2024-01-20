@@ -6,12 +6,13 @@ import { useState } from "react";
 const Login = () => {
 
     const [user,setUser] = useState(null)
-
     const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
+    
+    const googleProvider = new GoogleAuthProvider();
 
+// -----------------Sign In-------------------------
     const handleGoogleSignIn = () => {
-        signInWithPopup(auth, provider)
+        signInWithPopup(auth, googleProvider)
         .then(result => {
             const loggedInUser = result.user;
             console.log(loggedInUser);
@@ -22,6 +23,8 @@ const Login = () => {
         })
     }
 
+
+// -----------------Sign Out-------------------------
     const handleSignOut = () =>{
         signOut(auth)
             .then((result) => {
@@ -37,9 +40,7 @@ const Login = () => {
             {
                 user ? <button onClick={handleSignOut}>Sign Out</button> :
                 <button onClick={handleGoogleSignIn}>Google Login</button>
-            }
-            
-            
+            }    
             {
                user  && <div>
 
