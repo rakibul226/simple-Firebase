@@ -9,6 +9,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Login from './Login/Login';
+import HeroLogin from './HeroLogin/HeroLogin';
 
 
 const router = createBrowserRouter([
@@ -23,7 +24,12 @@ const router = createBrowserRouter([
       {
         path: '/login',
          element:<Login></Login>
+      },
+      {
+        path: '/heroLogin',
+         element:<HeroLogin></HeroLogin>
       }
+
     ]
   },
 ]);
