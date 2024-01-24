@@ -45,7 +45,7 @@ const HeroLogin = () => {
   };
 
   return (
-    <div>
+    <div className="px-20">
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
@@ -56,24 +56,26 @@ const HeroLogin = () => {
             </p>
           </div>
 
-          <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <div className="form-control">
+          <div className="card shrink-0 p-3 w-full max-w-sm shadow-2xl bg-base-100">
+            <div className="form-control relative">
               <form onSubmit={handleLogin}>
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
-                <input type="email" name="email" placeholder="email" className="input input-bordered" required />
+                <input type="email" name="email" placeholder="email" className="input input-bordered w-full" required />
 
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input type={ showPassField ? "text" : "password"} name="password" placeholder="password" className="input input-bordered" required />
+                <div>
+                <input type={ showPassField ? "text" : "password"} name="password" placeholder="password" className="input input-bordered w-full" required />
                 
-                <span onClick={() => setShowPassField(!showPassField)}>
+                <span className="absolute text-2xl pl-3 top-1/2 right-3" onClick={() => setShowPassField(!showPassField)}>
                   {
                   showPassField ? <IoEyeOffSharp /> : <IoEye /> 
                   }      
                 </span>
+                </div>
 
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
@@ -81,7 +83,7 @@ const HeroLogin = () => {
                   </a>
                 </label>
 
-                <input className="btn btn-secondary mb-4 w-3/4" type="submit" value="Login" />
+                <input className="btn btn-secondary bg-pink-700  mb-4 w-full" type="submit" value="Sign Up" />
               </form>
               {
                 registerError && <p className="text-red-600 text-xl ">{registerError}</p>
