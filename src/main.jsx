@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import Home from './Home/Home';
@@ -9,7 +9,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Login from './Login/Login';
-import HeroLogin from './HeroLogin/HeroLogin';
+import Registration from './HeroLogin/Registration';
+import LoginWEP from './Login/LoginWEP';
 
 
 const router = createBrowserRouter([
@@ -27,9 +28,12 @@ const router = createBrowserRouter([
       },
       {
         path: '/heroLogin',
-         element:<HeroLogin></HeroLogin>
+         element:<Registration></Registration>
+      },
+      {
+        path: '/loginWEP',
+         element:<LoginWEP></LoginWEP>
       }
-
     ]
   },
 ]);

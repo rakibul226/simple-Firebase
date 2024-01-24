@@ -3,7 +3,7 @@ import auth from "../FIREBASE/firebase.init";
 import { useState } from "react";
 import { IoEye,IoEyeOffSharp } from "react-icons/io5";
 
-const HeroLogin = () => {
+const Registration = () => {
 
 
   const [registerError, setRegisterError] = useState('');
@@ -55,7 +55,7 @@ const HeroLogin = () => {
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Login now!</h1>
+            <h1 className="text-5xl font-bold">Sign Up!</h1>
             <p className="py-6">
               Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In
               deleniti eaque aut repudiandae et a id nisi.
@@ -77,7 +77,7 @@ const HeroLogin = () => {
 
                 <input type={ showPassField ? "text" : "password"} name="password" placeholder="password" className="input input-bordered w-full" required />
                 
-                <span className="absolute text-2xl pl-3 top-1/2 right-3" onClick={() => setShowPassField(!showPassField)}>
+                <span className="absolute text-2xl pl-3 pt-3 right-3" onClick={() => setShowPassField(!showPassField)}>
                   {
                   showPassField ? <IoEyeOffSharp /> : <IoEye /> 
                   }      
@@ -112,4 +112,4 @@ const HeroLogin = () => {
   );
 };
 
-export default HeroLogin;
+export default Registration;
