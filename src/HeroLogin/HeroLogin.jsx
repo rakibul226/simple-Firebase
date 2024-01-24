@@ -1,19 +1,46 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import auth from "../FIREBASE/firebase.init";
+import { useState } from "react";
+import { IoEye,IoEyeOffSharp } from "react-icons/io5";
 
 const HeroLogin = () => {
+
+
+  const [registerError, setRegisterError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [showPassField, setShowPassField] = useState(false);
+
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log('Email:', email);
     console.log('Password:', password);
+
+    if(password.length < 6){
+      setRegisterError('Password can not be less then 6 characters');
+      return;
+    }
+    else if(!/A-Z/.test(password)){
+      setRegisterError('Password should have at least one upper case characters');
+      return;
+    }
+
+
+    //Reset Success
+    setSuccess('');
+    //reset Error
+    setRegisterError('');
+
+    //Create User
     createUserWithEmailAndPassword(auth, email, password)
     .then(result => {
       console.log(result.user);
+      setSuccess("User Created successfully")
     })
     .catch(error => {
       console.error(error);
+      setRegisterError(error.message);
     })
   };
 
@@ -40,7 +67,13 @@ const HeroLogin = () => {
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input type="password" name="password" placeholder="password" className="input input-bordered" required />
+                <input type={ showPassField ? "text" : "password"} name="password" placeholder="password" className="input input-bordered" required />
+                
+                <span onClick={() => setShowPassField(!showPassField)}>
+                  {
+                  showPassField ? <IoEyeOffSharp /> : <IoEye /> 
+                  }      
+                </span>
 
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
@@ -50,6 +83,14 @@ const HeroLogin = () => {
 
                 <input className="btn btn-secondary mb-4 w-3/4" type="submit" value="Login" />
               </form>
+              {
+                registerError && <p className="text-red-600 text-xl ">{registerError}</p>
+              }
+              {
+                success && <p className="text-green-600 text-xl ">{success}
+
+                  </p>
+              }
             </div>
           </div>
         </div>
