@@ -14,15 +14,21 @@ const HeroLogin = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log('Email:', email);
-    console.log('Password:', password);
+    const accepted = e.target.terms.checked;
+    console.log(email,password,accepted);
+
 
     if(password.length < 6){
       setRegisterError('Password can not be less then 6 characters');
       return;
     }
-    else if(!/A-Z/.test(password)){
-      setRegisterError('Password should have at least one upper case characters');
+    else if(!/[A-Z]/.test(password)){
+      setRegisterError('Password should have at least one uppercase character');
+      return;
+    }
+    
+    else if(!accepted){
+      setRegisterError('Accept out Terms and condition to continue')
       return;
     }
 
@@ -68,6 +74,7 @@ const HeroLogin = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <div>
+
                 <input type={ showPassField ? "text" : "password"} name="password" placeholder="password" className="input input-bordered w-full" required />
                 
                 <span className="absolute text-2xl pl-3 top-1/2 right-3" onClick={() => setShowPassField(!showPassField)}>
@@ -83,6 +90,10 @@ const HeroLogin = () => {
                   </a>
                 </label>
 
+                  <div>
+                    <input type="checkbox" name="terms" id="terms" />
+                    <label className="ml-2"><a href="">Terms and Conditions</a></label>
+                  </div>
                 <input className="btn btn-secondary bg-pink-700  mb-4 w-full" type="submit" value="Sign Up" />
               </form>
               {
