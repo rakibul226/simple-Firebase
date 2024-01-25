@@ -51,14 +51,21 @@ const Registration = () => {
   };
 
   return (
-    <div className="px-20">
-      <div className="hero min-h-screen bg-base-200">
+    <div className="px-10">
+      <div className=" ">
         <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Sign Up!</h1>
+
+          <div className="text-center ">
+            <h1 className="text-4xl font-bold">Sign Up!</h1>
             <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In
-              deleniti eaque aut repudiandae et a id nisi.
+            {
+                registerError && <p className="text-red-600 text-xl ">{registerError}</p>
+              }
+              {
+                success && <p className="text-green-600 text-xl ">{success}
+
+                  </p>
+              }
             </p>
           </div>
 
@@ -84,28 +91,18 @@ const Registration = () => {
                 </span>
                 </div>
 
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
+                
 
-                  <div>
+                  <div className="pt-7">
                     <input type="checkbox" name="terms" id="terms" />
                     <label className="ml-2"><a href="">Terms and Conditions</a></label>
                   </div>
                 <input className="btn btn-secondary bg-pink-700  mb-4 w-full" type="submit" value="Sign Up" />
               </form>
-              {
-                registerError && <p className="text-red-600 text-xl ">{registerError}</p>
-              }
-              {
-                success && <p className="text-green-600 text-xl ">{success}
-
-                  </p>
-              }
+              
             </div>
           </div>
+          
         </div>
       </div>
     </div>

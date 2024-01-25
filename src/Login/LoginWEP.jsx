@@ -1,61 +1,58 @@
-
 import { signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../FIREBASE/firebase.init";
-import { useState } from "react";
-import { IoEye,IoEyeOffSharp } from "react-icons/io5";
+import { useRef, useState } from "react";
+import { IoEye, IoEyeOffSharp } from "react-icons/io5";
 
 const LoginWEP = () => {
-
-
   const [registerError, setRegisterError] = useState('');
   const [success, setSuccess] = useState('');
   const [showPassField, setShowPassField] = useState(false);
+  const emailRef = useRef(null);
 
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
- 
-
 
     if(password.length < 6){
-      setRegisterError('Password can not be less then 6 characters');
+      setRegisterError('Password cannot be less than 6 characters');
       return;
     }
     else if(!/[A-Z]/.test(password)){
       setRegisterError('Password should have at least one uppercase character');
       return;
     }
-    
-   
 
-
-    //Reset Success
+    // Reset Success
     setSuccess('');
-    //reset Error
+    // Reset Error
     setRegisterError('');
-    
-    //Create User
+
+    // Create User
     signInWithEmailAndPassword(auth, email, password)
-    .then(result => {
-      console.log(result.user);
-      setSuccess(`You are logged in as ${email}`);
-    })
-    .catch(error => {
-      console.error(error);
-    //   setRegisterError(error.message);
-    })
+      .then(result => {
+        console.log(result.user);
+        setSuccess(`You are logged in as ${email}`);
+      })
+      .catch(error => {
+        console.error(error);
+        setRegisterError(error.message);
+      });
   };
 
+  const handleForgetPassword = () =>{
+      console.log("donne");
+  }
+
   return (
-    <div className="px-20">
-      <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row-reverse">
+    <div className="flex items-center justify-center h-screen bg-base-200 mt-10npm ">
+      <div className="hero ">
+        <div className="hero-content flex flex-col items-center lg:flex-row-reverse">
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold">Login now!</h1>
             <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In
-              deleniti eaque aut repudiandae et a id nisi.
+              {registerError && <p className="text-red-600 text-xl ">{registerError}</p>}
+              {success && <p className="text-green-600 text-xl ">{success}</p>}
             </p>
           </div>
 
@@ -71,33 +68,21 @@ const LoginWEP = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <div>
-
-                <input type={ showPassField ? "text" : "password"} name="password" placeholder="password" className="input input-bordered w-full" required />
-                
-                <span className="absolute text-2xl pl-3 pt-3 right-3" onClick={() => setShowPassField(!showPassField)}>
-                  {
-                  showPassField ? <IoEyeOffSharp /> : <IoEye /> 
-                  }      
-                </span>
+                  <input type={showPassField ? "text" : "password"} name="password" placeholder="password" className="input input-bordered w-full" required />
+                  <span className="absolute text-2xl pl-3 pt-3 right-3" onClick={() => setShowPassField(!showPassField)}>
+                    {showPassField ? <IoEyeOffSharp /> : <IoEye />}
+                  </span>
                 </div>
 
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
+                  <a onClick={handleForgetPassword} className="label-text-alt link link-hover">
                     Forgot password?
                   </a>
                 </label>
 
-                  
+               
                 <input className="btn btn-secondary bg-emerald-500  mb-4 w-full" type="submit" value="Sign Up" />
               </form>
-              {
-                registerError && <p className="text-red-600 text-xl ">{registerError}</p>
-              }
-              {
-                success && <p className="text-green-600 text-xl ">{success}
-
-                  </p>
-              }
             </div>
           </div>
         </div>
