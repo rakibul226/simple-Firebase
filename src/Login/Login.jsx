@@ -70,18 +70,21 @@ const Login = () => {
     }
 
     return (
-        <div className="text-6xl"> 
+        <div className="flex items-center justify-center h-screen"> 
+            <div className=" ">
             {
                 user ? <button onClick={handleSignOut}>Sign Out</button> :
-                <div>
-                    <button onClick={handleGoogleSignIn}>Google Login</button>
-                    <button onClick={handleGithubSignIn}>Github Login</button>
+                <div className="flex gap-7 text-3xl">
+                    <button className="bg-gray-700 font-bold py-2 px-3 rounded-md text-white hover:bg-white hover:text-black" 
+                    onClick={handleGoogleSignIn}>Google Login</button>
+
+                    <button className="bg-gray-700 font-bold py-2 px-3 rounded-md text-white hover:bg-white hover:text-black" onClick={handleGithubSignIn}>Github Login</button>
                     {/* <button onClick={handleFacebookSignIn}>Facebook Login</button> */}
 
                 </div>
             }    
             {
-               user  && <div>
+               user  && <div >
 
                         <h2>User: {user.displayName}</h2>
                         <h2>Email: {user.email}</h2>
@@ -89,6 +92,7 @@ const Login = () => {
                     </div>
 
             }
+            </div>
             
         </div>
     );
