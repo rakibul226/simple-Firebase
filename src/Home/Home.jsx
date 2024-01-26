@@ -2,9 +2,12 @@
 
 const Home = () => {
     return (
-        <div>
-            <h2 className="text-6xl">This is from home</h2>
-        </div>
+        <>
+             <div className=" flex justify-center items-center" style={{ height: "calc(100vh - 95px)" }}>
+                  <h2 className="text-6xl" >Learn Firebase Authentication</h2>
+             </div>
+        </>
+       
     );
 };
 

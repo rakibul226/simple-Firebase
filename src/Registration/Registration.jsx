@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 import auth from "../FIREBASE/firebase.init";
 import { useState } from "react";
 import { IoEye,IoEyeOffSharp } from "react-icons/io5";
@@ -12,6 +12,7 @@ const Registration = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
     const accepted = e.target.terms.checked;
@@ -42,7 +43,19 @@ const Registration = () => {
     createUserWithEmailAndPassword(auth, email, password)
     .then(result => {
       console.log(result.user);
-      setSuccess("User Created successfully")
+      setSuccess("User Created successfully");
+
+      //update profile'
+      updateProfile(result.user,{
+        displayName: name,
+        photoURL: "https://example.com"
+      })
+
+      //send verification email
+      sendEmailVerification(result.user)
+       .then(() =>{
+        alert('Please check your email and verify your account')
+       })
     })
     .catch(error => {
       console.error(error);
@@ -51,12 +64,13 @@ const Registration = () => {
   };
 
   return (
-    <div className="px-10">
-      <div className=" ">
-        <div className="hero-content flex-col lg:flex-row-reverse">
+
+    <>
+        <div className=" flex  lg:flex-row-reverse h-screen items-center justify-center gap-10" 
+                         style={{ height: "calc(100vh - 75px)" }}>
 
           <div className="text-center ">
-            <h1 className="text-4xl font-bold">Sign Up!</h1>
+            <h1 className="text-5xl font-bold">Sign Up Now!</h1>
             <p className="py-6">
             {
                 registerError && <p className="text-red-600 text-xl ">{registerError}</p>
@@ -72,6 +86,11 @@ const Registration = () => {
           <div className="card shrink-0 p-3 w-full max-w-sm shadow-2xl bg-base-100">
             <div className="form-control relative">
               <form onSubmit={handleLogin}>
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input type="text" name="name" placeholder="Name" className="input input-bordered w-full" required />
+                
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
@@ -97,15 +116,14 @@ const Registration = () => {
                     <input type="checkbox" name="terms" id="terms" />
                     <label className="ml-2"><a href="">Terms and Conditions</a></label>
                   </div>
-                <input className="btn btn-secondary bg-pink-700  mb-4 w-full" type="submit" value="Sign Up" />
+                <input className="btn btn-secondary bg-pink-600 text-xl  mb-4 w-full mt-1 hover:text-white hover:bg-blue-500 border-none" type="submit" value="Sign Up" />
               </form>
               
             </div>
           </div>
           
         </div>
-      </div>
-    </div>
+    </>
   );
 };
 

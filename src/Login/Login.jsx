@@ -70,7 +70,7 @@ const Login = () => {
     }
 
     return (
-        <div className="flex items-center justify-center h-screen"> 
+        <div className="flex items-center justify-center h-screen" style={{ height: "calc(100vh - 95px)" }}> 
             <div className=" ">
             {
                 user ? <button onClick={handleSignOut}>Sign Out</button> :

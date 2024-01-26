@@ -43,7 +43,7 @@ const LoginWEP = () => {
   const handleResetPassword = () =>{
 
       const email = emailRef.current.value;
-      
+
       sendPasswordResetEmail(auth, email)
       .then( () => {
         setSuccess(`Reset Request send to ${email}, please check your email`);
@@ -55,11 +55,12 @@ const LoginWEP = () => {
   }
 
   return (
-    <div className="flex items-center justify-center h-screen bg-base-200 mt-10npm ">
-      <div className="hero ">
-        <div className="hero-content flex flex-col items-center lg:flex-row-reverse">
+
+      <div className=" ">
+        <div className=" flex  lg:flex-row-reverse h-screen items-center justify-center gap-10" 
+                         style={{ height: "calc(100vh - 75px)" }}>
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Login now!</h1>
+            <h1 className="text-5xl font-bold">Login Here!</h1>
             <p className="py-6">
               {registerError && <p className="text-red-600 text-xl ">{registerError}</p>}
               {success && <p className="text-green-600 text-xl ">{success}</p>}
@@ -91,13 +92,13 @@ const LoginWEP = () => {
                 </label>
 
                
-                <input className="btn btn-secondary bg-emerald-500  mb-4 w-full" type="submit" value="Sign Up" />
+                <input className="btn btn-secondary text-xl bg-emerald-500  mb-4 w-full border-none hover:text-white hover:bg-blue-600" 
+                                  type="submit" value="Sign Up" />
               </form>
             </div>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
