@@ -11,7 +11,7 @@ const LoginWEP = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const email = e.target.email.value;
+    const email = e.target.email.value; 
     const password = e.target.password.value;
 
     if(password.length < 6){
@@ -28,7 +28,7 @@ const LoginWEP = () => {
     // Reset Error
     setRegisterError('');
 
-    // Create User
+    // Login with Email 
     signInWithEmailAndPassword(auth, email, password)
       .then(result => {
         console.log(result.user);
@@ -41,14 +41,12 @@ const LoginWEP = () => {
   };
 
   const handleResetPassword = () =>{
-      console.log("donne");
-      
-      const email = emailRef.current.value;
-      console.log(email);
 
+      const email = emailRef.current.value;
+      
       sendPasswordResetEmail(auth, email)
       .then( () => {
-        setSuccess(`Reset Request send to ${email}`);
+        setSuccess(`Reset Request send to ${email}, please check your email`);
       })
       .catch(error => {
         console.error(error);
