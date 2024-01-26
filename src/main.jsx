@@ -9,7 +9,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Login from './Login/Login';
-import Registration from './HeroLogin/Registration';
+import Registration from './Registration/Registration';
 import LoginWEP from './Login/LoginWEP';
 
 
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
          element:<LoginWEP></LoginWEP>
       }
     ]
-  },
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
