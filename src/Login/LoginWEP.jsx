@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword,sendPasswordResetEmail } from "firebase/auth";
 import auth from "../FIREBASE/firebase.init";
 import { useRef, useState } from "react";
 import { IoEye, IoEyeOffSharp } from "react-icons/io5";
@@ -40,8 +40,20 @@ const LoginWEP = () => {
       });
   };
 
-  const handleForgetPassword = () =>{
+  const handleResetPassword = () =>{
       console.log("donne");
+      
+      const email = emailRef.current.value;
+      console.log(email);
+
+      sendPasswordResetEmail(auth, email)
+      .then( () => {
+        setSuccess(`Reset Request send to ${email}`);
+      })
+      .catch(error => {
+        console.error(error);
+        setRegisterError(error.message);
+      });
   }
 
   return (
@@ -62,7 +74,7 @@ const LoginWEP = () => {
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
-                <input type="email" name="email" placeholder="email" className="input input-bordered w-full" required />
+                <input type="email" ref={emailRef} name="email" placeholder="email" className="input input-bordered w-full" required />
 
                 <label className="label">
                   <span className="label-text">Password</span>
@@ -75,7 +87,7 @@ const LoginWEP = () => {
                 </div>
 
                 <label className="label">
-                  <a onClick={handleForgetPassword} className="label-text-alt link link-hover">
+                  <a onClick={handleResetPassword} className="label-text-alt link link-hover pt-4 pb-1">
                     Forgot password?
                   </a>
                 </label>
